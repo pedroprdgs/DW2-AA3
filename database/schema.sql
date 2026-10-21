@@ -1,0 +1,29 @@
+CREATE DATABASE IF NOT EXISTS db_venda;
+
+USE db_venda;
+
+CREATE TABLE IF NOT EXISTS vendedores(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    meta_mensal DECIMAL(12,2) NOT NULL DEFAULT 0,
+    percentual_base DECIMAL(5,2) NOT NULL DEFAULT 0,
+    ativo BOOLEAN NOT NULL DEFAULT 1
+);
+
+CREATE TABLE IF NOT EXISTS regioes(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    percentual_bonus DECIMAL(5,2) NOT NULL DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS vendas(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    id_vendedor INT NOT NULL,
+    id_regiao INT NOT NULL,
+    data_venda DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    valor_venda DECIMAL(12,2) NOT NULL DEFAULT 0,
+    tipo_cliente ENUM('PF', 'PJ') NOT NULL DEFAULT 'PF',
+    valor_comissao DECIMAL(12,2) NOT NULL DEFAULT 0,
+    FOREIGN KEY (id_vendedor) REFERENCES vendedores(id),
+    FOREIGN KEY (id_regiao) REFERENCES regioes(id)
+);
