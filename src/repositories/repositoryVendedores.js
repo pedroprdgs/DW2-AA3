@@ -1,4 +1,4 @@
-import pool from "../config/database";
+import pool from "../config/database.js";
 
 // GET ALL
 export async function buscarTodos() {
@@ -22,12 +22,13 @@ export async function buscarPorId(id) {
 // POST
 export async function cadastrar(params) {
     const [resultado] = await pool.execute(
-        "INSERT INTO vendedores (nome, meta_mensal, percentual_base, ativo) VALUES (?, ?, ?, ?)",
+        `INSERT INTO vendedores
+        (nome, meta_mensal, percentual_base, ativo)
+        VALUES (?, ?, ?, 1)`,
         [
             params.nome,
-            params.meta_mensal ?? 0,
-            params.percentual_base ?? 0,
-            params.ativo ?? 1
+            params.meta_mensal,
+            params.percentual_base
         ]
     );
 
@@ -37,8 +38,10 @@ export async function cadastrar(params) {
 // PUT
 export async function atualizar(params) {
     await pool.execute(
-        "UPDATE vendedores SET nome = ?, meta_mensal = ?, percentual_base = ? WHERE id = ?",
-        [params.nome, params.meta_mensal, params.percentual_base, params.id]
+        `UPDATE vendedores
+        meta_mensal = ?, percentual_base = ?
+        WHERE id = ?`,
+        [params.meta_mensal, params.percentual_base, params.id]
     );
 
     return buscarPorId(params.id);
@@ -55,7 +58,7 @@ export async function desativar(id) {
 }
 
 // PATCH - Ativar
-export async function desativar(id) {
+export async function ativar(id) {
     await pool.execute(
         "UPDATE vendedores SET ativo = 1 WHERE id = ?",
         [id]
