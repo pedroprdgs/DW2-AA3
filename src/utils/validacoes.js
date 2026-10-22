@@ -58,11 +58,11 @@ export function validarDataSimples(data) {
 }
 
 export function validarPeriodoTempo(inicio, fim) {
-    if (!validarData(inicio)) {
+    if (!validarDataSimples(inicio)) {
         throw criarErro("A data inicial é obrigatória e deve estar no formato YYYY-MM-DD.", 400)
     }
 
-    if (!validarData(fim)) {
+    if (!validarDataSimples(fim)) {
         throw criarErro("A data final é obrigatória e deve estar no formato YYYY-MM-DD.", 400)
     }
 

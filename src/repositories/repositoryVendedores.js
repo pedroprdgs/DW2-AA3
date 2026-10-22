@@ -36,15 +36,15 @@ export async function cadastrar(params) {
 }
 
 // PUT
-export async function atualizar(params) {
+export async function atualizar(id, params) {
     await pool.execute(
-        `UPDATE vendedores
+        `UPDATE vendedores SET
         meta_mensal = ?, percentual_base = ?
         WHERE id = ?`,
-        [params.meta_mensal, params.percentual_base, params.id]
+        [params.meta_mensal, params.percentual_base, id]
     );
 
-    return buscarPorId(params.id);
+    return buscarPorId(id);
 }
 
 // PATCH - Desativar

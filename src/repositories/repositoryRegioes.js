@@ -1,4 +1,4 @@
-import pool from "../config/database";
+import pool from "../config/database.js";
 
 export async function buscarRegiaoPorId(id) {
     const [regiao] = await pool.execute(

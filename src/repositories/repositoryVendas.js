@@ -1,4 +1,4 @@
-import pool from "../config/database";
+import pool from "../config/database.js";
 
 // GET ALL
 export async function buscarTodos() {

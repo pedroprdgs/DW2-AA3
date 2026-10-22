@@ -3,6 +3,7 @@ import * as vendedorRepository from "../repositories/repositoryVendedores.js";
 import * as regiaoRepository from "../repositories/repositoryRegioes.js"
 import criarErro from "../utils/criarErro.js";
 import { validarDadoEmEnum, validarData, validarId, validarNumeroPositivo } from "../utils/validacoes.js";
+import calcularComissao from "../utils/calcularComissao.js";
 
 // GET ALL
 export async function listarVendas() {
@@ -26,7 +27,7 @@ export async function consultarVendasPorVendedor(id) {
 export async function consultarVendasPorRegiao(id) {
     validarId(id, 'id_regiao');
 
-    const regiao = await regiaoRepository.buscarPorId(Number(id));
+    const regiao = await regiaoRepository.buscarRegiaoPorId(Number(id));
 
     if (!regiao) {
         throw criarErro("Região não encontrada.", 404);
@@ -37,7 +38,6 @@ export async function consultarVendasPorRegiao(id) {
 
 // POST
 export async function registrarVenda(dados) {
-    validarId(dados.id,);
     validarId(dados.id_vendedor, 'id_vendedor');
     validarId(dados.id_regiao, 'id_regiao');
 
@@ -57,7 +57,7 @@ export async function registrarVenda(dados) {
         throw criarErro("Vendedor inativo.", 400);
     }
 
-    const regiao = await regiaoRepository.buscarPorId(Number(dados.id_regiao));
+    const regiao = await regiaoRepository.buscarRegiaoPorId(Number(dados.id_regiao));
 
     if (!regiao) {
         throw criarErro("Região não encontrada.", 404);

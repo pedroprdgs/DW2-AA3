@@ -1,6 +1,6 @@
-import * as vendedorRepository from '../repositories/repositoryVendedores';
-import { validarId, validarStringObrigatoria, validarNumeroPositivo, validarPercentual } from '../utils/validacoes';
-import criarErro from '../utils/criarErro';
+import * as vendedorRepository from '../repositories/repositoryVendedores.js';
+import { validarId, validarStringObrigatoria, validarNumeroPositivo, validarPercentual } from '../utils/validacoes.js';
+import criarErro from '../utils/criarErro.js';
 
 const MAXIMO_CARACTERES_NOME = 100;
 
@@ -43,11 +43,13 @@ export async function atualizarVendedor(id, dados) {
 
     await buscarVendedor(id);
 
-    return vendedorRepository.atualizar({
+    return vendedorRepository.atualizar(
         id,
-        meta_mensal: dados.meta_mensal,
-        percentual_base: dados.percentual_base
-    });
+        {
+            meta_mensal: dados.meta_mensal,
+            percentual_base: dados.percentual_base
+        }
+    );
 }
 
 // PATCH - Desativar

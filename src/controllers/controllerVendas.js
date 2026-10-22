@@ -14,7 +14,7 @@ export async function listar(req, res, next) {
 // GET BY vendedor
 export async function consultarPorVendedor(req, res, next) {
     try {
-        const vendas = await vendaService.consultarVendasPorVendedor(req.params.id);
+        const vendas = await vendaService.consultarVendasPorVendedor(Number(req.params.id));
 
         return res.status(200).json(vendas);
     } catch (erro) {
@@ -25,7 +25,7 @@ export async function consultarPorVendedor(req, res, next) {
 // GET BY região
 export async function consultarPorRegiao(req, res, next) {
     try {
-        const vendas = await vendaService.consultarVendasPorRegiao(req.params.id);
+        const vendas = await vendaService.consultarVendasPorRegiao(Number(req.params.id));
 
         return res.status(200).json(vendas);
     } catch (erro) {
@@ -47,7 +47,7 @@ export async function registrar(req, res, next) {
 // DELETE
 export async function excluir(req, res, next) {
     try {
-        const resultado = await vendaService.excluirVenda(req.params.id);
+        const resultado = await vendaService.excluirVenda(Number(req.params.id));
 
         return res.status(200).json(resultado);
     } catch (erro) {

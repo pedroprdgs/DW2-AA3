@@ -20,7 +20,7 @@ Desenvolva uma aplicação Back-End em **JavaScript** com Node.js e MySQL para g
 
 ## Modelagem do banco de dados
 
-Criar o banco `db_vendas` e, no mínimo, as três tabelas abaixo. Definir chaves primárias, estrangeiras e restrições de integridade.
+Criar o banco `db_venda` e, no mínimo, as três tabelas abaixo. Definir chaves primárias, estrangeiras e restrições de integridade.
 
 ### Vendedores
 
@@ -188,7 +188,7 @@ Cadastrar no mínimo cinco vendedores e quinze vendas distribuídas entre as qua
 
 * Capturas de tela das requisições e respostas no Postman ou Insomnia.
 
-* README com instalação, configuração e execução da aplicação.
+* README com [instalação](./INSTALLATION.md), [configuração](./INSTRUCTIONS.md) e execução da aplicação.
 
 * Credenciais do banco em variáveis de ambiente, sem senhas no código-fonte.
 

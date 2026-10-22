@@ -69,7 +69,7 @@ export async function buscarMaiorVendedor(inicio, fim) {
             ON v.id_vendedor = ven.id
         WHERE v.data_venda >= ?
             AND v.data_venda < DATE_ADD(?, INTERVAL 1 DAY)
-        GROUP BY ven.id, ven.nom
+        GROUP BY ven.id, ven.nome
         ORDER BY valor_total_vendas DESC
         LIMIT 1`,
         [inicio, fim]
@@ -92,7 +92,8 @@ export async function buscarMaiorComissao(inicio, fim) {
             AND v.data_venda < DATE_ADD(?, INTERVAL 1 DAY)
         GROUP BY ven.id, ven.nome
         ORDER BY comissao_acumulada DESC
-        LIMIT 1`
+        LIMIT 1`,
+        [inicio, fim]
     );
 
     return resultado[0] ?? null;
@@ -113,9 +114,9 @@ export async function contarMetasAtingidas(inicio, fim) {
             WHERE v.data_venda >= ?
                 AND v.data_venda < DATE_ADD(?, INTERVAL 1 DAY)
             GROUP BY ven.id, ven.meta_mensal
-            HAVING SUM(v.valor_mensal) >= ven.meta_mensal
+            HAVING SUM(v.valor_venda) >= ven.meta_mensal
         ) AS vendedores_meta`,
-    [inicio, fim]
+        [inicio, fim]
     );
 
     return resultado[0].vendedores_com_meta_atingida;
